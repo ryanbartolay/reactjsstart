@@ -4,6 +4,7 @@ var GreeterMessage = React.createClass({
 
         var name = this.props.name; // props is for the properties rendered in html tags
         var message = this.props.message;
+        
         return ( // Static content to be injected in main component
             <div>
                 <h1>Hello {name}!@#</h1>
@@ -22,17 +23,27 @@ var GreeterForm = React.createClass({
         //  Prevent a link from following the URL
 
         var name = this.refs.name.value; // refs are for the reference name on input types
+        var message = this.refs.message.value;
 
         if (typeof name === "string" && name.length > 0) {
             this.props.onNewName(name);
         }
+
+        if (typeof message === "string" && message.length > 0) {
+            this.props.onNewMessage(message);
+        }
+
+        // lets reset the value of the referenced form elements
+        this.refs.name.value = '';
+        this.refs.message.value = '';
     },
     render: function () {
         return (
             <div>
                 <form onSubmit={this.onFormSubmit}>
-                    <input type="text" ref="name" />
-                    <button>Set Name</button>
+                    <input type="text" ref="name" /><br />
+                    <textarea ref="message" /><br />
+                    <button>Submit</button>
                 </form>
             </div>
         );
@@ -60,13 +71,20 @@ var Greeter = React.createClass({ // basic class creation and will return as a c
             });
         }
     },
+    handleNewMessage: function(message) {
+        if (typeof name === "string" && name.length > 0) {
+            this.setState({
+                message: message
+            });
+        }
+    },
     render: function () { // this is predefined element in react, renders html to be replaced on the greeter place holder
         var name = this.state.name;
         var message = this.state.message;
         return (
             <div>
-                <GreeterMessage name={name} message={message}/>
-                <GreeterForm onNewName={this.handleNewName} />
+                <GreeterMessage name={name} message={message} />
+                <GreeterForm onNewName={this.handleNewName} onNewMessage={this.handleNewMessage} />
             </div>
         ); // encapsulates the form into a nested component GreeterForm
     }
