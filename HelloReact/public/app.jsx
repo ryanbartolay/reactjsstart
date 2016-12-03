@@ -3,10 +3,11 @@ var GreeterMessage = React.createClass({
     render: function () { // always remember that a component MUST always have a render function
 
         var name = this.props.name; // props is for the properties rendered in html tags
+        var message = this.props.message;
         return ( // Static content to be injected in main component
             <div>
                 <h1>Hello {name}!@#</h1>
-                <p>Some paragraph</p>
+                <p>{message}</p>
             </div>
         );
     }
@@ -48,7 +49,8 @@ var Greeter = React.createClass({ // basic class creation and will return as a c
     },
     getInitialState: function () { // Sets initial state of the form
         return {
-            name: this.props.name
+            name: this.props.name,
+            message: this.props.message
         };
     },
     handleNewName: function (name) {
@@ -60,10 +62,10 @@ var Greeter = React.createClass({ // basic class creation and will return as a c
     },
     render: function () { // this is predefined element in react, renders html to be replaced on the greeter place holder
         var name = this.state.name;
-        var message = this.props.message;
+        var message = this.state.message;
         return (
             <div>
-                <GreeterMessage name={name} />
+                <GreeterMessage name={name} message={message}/>
                 <GreeterForm onNewName={this.handleNewName} />
             </div>
         ); // encapsulates the form into a nested component GreeterForm
