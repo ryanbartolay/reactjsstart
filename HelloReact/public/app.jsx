@@ -4,7 +4,7 @@ var GreeterMessage = React.createClass({
 
         var name = this.props.name; // props is for the properties rendered in html tags
         var message = this.props.message;
-        
+
         return ( // Static content to be injected in main component
             <div>
                 <h1>Hello {name}!@#</h1>
@@ -22,20 +22,22 @@ var GreeterForm = React.createClass({
         //  Prevent a submit button from submitting a form
         //  Prevent a link from following the URL
 
-        var name = this.refs.name.value; // refs are for the reference name on input types
+        var updates = {};
+
+        var name = this.refs.name.value;
         var message = this.refs.message.value;
 
         if (typeof name === "string" && name.length > 0) {
-            this.props.onNewName(name);
+            this.refs.name.value = "";
+            updates.name = name;
+            this.props.onNewUpdates(updates);
         }
 
-        if (typeof message === "string" && message.length > 0) {
-            this.props.onNewMessage(message);
+        if(typeof message === "string" && message.length > 0) {
+            this.refs.message.value = "";
+            updates.message = message;
+            this.props.onNewUpdates(updates);
         }
-
-        // lets reset the value of the referenced form elements
-        this.refs.name.value = '';
-        this.refs.message.value = '';
     },
     render: function () {
         return (
@@ -64,19 +66,8 @@ var Greeter = React.createClass({ // basic class creation and will return as a c
             message: this.props.message
         };
     },
-    handleNewName: function (name) {
-        if (typeof name === "string" && name.length > 0) { // this will check if name is a string and length is greater than 0
-            this.setState({
-                name: name
-            });
-        }
-    },
-    handleNewMessage: function(message) {
-        if (typeof name === "string" && name.length > 0) {
-            this.setState({
-                message: message
-            });
-        }
+    handleNewUpdates: function (updates) {
+        this.setState(updates);
     },
     render: function () { // this is predefined element in react, renders html to be replaced on the greeter place holder
         var name = this.state.name;
@@ -84,7 +75,7 @@ var Greeter = React.createClass({ // basic class creation and will return as a c
         return (
             <div>
                 <GreeterMessage name={name} message={message} />
-                <GreeterForm onNewName={this.handleNewName} onNewMessage={this.handleNewMessage} />
+                <GreeterForm onNewUpdates={this.handleNewUpdates} />
             </div>
         ); // encapsulates the form into a nested component GreeterForm
     }
