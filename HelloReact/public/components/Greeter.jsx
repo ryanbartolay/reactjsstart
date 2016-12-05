@@ -1,6 +1,6 @@
 var React = require("react");
-var GreeterMessage = require("./GreeterMessage");
-var GreeterForm = require("./GreeterForm");
+var GreeterMessage = require("GreeterMessage");
+var GreeterForm = require("GreeterForm");
 
 // Container Components - keeps the state of the component and the related components
 var Greeter = React.createClass({ // basic class creation and will return as a component
