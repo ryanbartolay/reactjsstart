@@ -1,3 +1,6 @@
+var React = require("react");
+var ReactDOM = require("react-dom");
+
 // nesting component (Presentation Component - render html to the browser)
 var GreeterMessage = React.createClass({
     render: function () { // always remember that a component MUST always have a render function
