@@ -48,11 +48,12 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var Greeter = __webpack_require__(159);
 
-	var name = "Ryan";
-
-	ReactDOM.render(React.createElement(Greeter, { name: name, message: "overrided component message" }), document.getElementById("app"));
+	ReactDOM.render(React.createElement(
+	    "h1",
+	    null,
+	    "Boilerplate app!"
+	), document.getElementById("app"));
 
 /***/ },
 /* 1 */
@@ -19747,151 +19748,6 @@
 
 	module.exports = __webpack_require__(3);
 
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-	var GreeterMessage = __webpack_require__(160);
-	var GreeterForm = __webpack_require__(161);
-
-	// Container Components - keeps the state of the component and the related components
-	var Greeter = React.createClass({
-	    displayName: "Greeter",
-	    // basic class creation and will return as a component
-	    getDefaultProps: function getDefaultProps() {
-	        // this is predefined as it gets and sets default component propertieS
-	        return {
-	            name: "React",
-	            message: "This is a component"
-	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        // Sets initial state of the form
-	        return {
-	            name: this.props.name,
-	            message: this.props.message
-	        };
-	    },
-	    handleNewUpdates: function handleNewUpdates(updates) {
-	        this.setState(updates);
-	    },
-	    render: function render() {
-	        // this is predefined element in react, renders html to be replaced on the greeter place holder
-	        var name = this.state.name;
-	        var message = this.state.message;
-	        return React.createElement(
-	            "div",
-	            null,
-	            React.createElement(GreeterMessage, { name: name, message: message }),
-	            React.createElement(GreeterForm, { onNewUpdates: this.handleNewUpdates })
-	        ); // encapsulates the form into a nested component GreeterForm
-	    }
-	});
-
-	module.exports = Greeter;
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	// nesting component (Presentation Component - render html to the browser)
-	var GreeterMessage = React.createClass({
-	    displayName: "GreeterMessage",
-
-	    render: function render() {
-	        // always remember that a component MUST always have a render function
-
-	        var name = this.props.name; // props is for the properties rendered in html tags
-	        var message = this.props.message;
-
-	        return (// Static content to be injected in main component
-	            React.createElement(
-	                "div",
-	                null,
-	                React.createElement(
-	                    "h1",
-	                    null,
-	                    "Hello ",
-	                    name,
-	                    "!@#"
-	                ),
-	                React.createElement(
-	                    "p",
-	                    null,
-	                    message
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = GreeterMessage;
-
-/***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var React = __webpack_require__(1);
-
-	// nesting component (Presentation Component - render html to the browser)
-	var GreeterForm = React.createClass({
-	    displayName: "GreeterForm",
-
-	    onFormSubmit: function onFormSubmit(event) {
-	        event.preventDefault(); // The event.preventDefault() method stops the default action of an element from happening.
-	        // For example: 
-	        //  Prevent a submit button from submitting a form
-	        //  Prevent a link from following the URL
-
-	        var updates = {};
-
-	        var name = this.refs.name.value;
-	        var message = this.refs.message.value;
-
-	        if (typeof name === "string" && name.length > 0) {
-	            this.refs.name.value = "";
-	            updates.name = name;
-	            this.props.onNewUpdates(updates);
-	        }
-
-	        if (typeof message === "string" && message.length > 0) {
-	            this.refs.message.value = "";
-	            updates.message = message;
-	            this.props.onNewUpdates(updates);
-	        }
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            "div",
-	            null,
-	            React.createElement(
-	                "form",
-	                { onSubmit: this.onFormSubmit },
-	                React.createElement("input", { type: "text", ref: "name" }),
-	                React.createElement("br", null),
-	                React.createElement("textarea", { ref: "message" }),
-	                React.createElement("br", null),
-	                React.createElement(
-	                    "button",
-	                    null,
-	                    "Submit"
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = GreeterForm;
 
 /***/ }
 /******/ ]);

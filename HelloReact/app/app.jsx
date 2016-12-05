@@ -1,10 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-var Greeter = require("Greeter");
-
-var name = "Ryan";
 
 ReactDOM.render(
-    <Greeter name={name} message="overrided component message" />,
+    <h1>Boilerplate app!</h1>,
     document.getElementById("app")
 );
